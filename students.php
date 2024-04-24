@@ -23,8 +23,7 @@
                 <form id="saveStudent">
                     <div class="modal-body">
 
-                        <div class="alert alert-warning d-none">
-
+                        <div class="alert alert-warning d-none" id="errorMessage">
                         </div>
 
                         <div class="mb-3">
@@ -54,7 +53,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -68,7 +67,46 @@
                         </h4>
                     </div>
                     <div class="card-body">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Telemóvel</th>
+                                    <th>Curso</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                require 'dbcon.php';
+                                $query = "SELECT * FROM students";
+                                $query_run = mysqli_query($con, $query);
 
+                                if (mysqli_num_rows($query_run) > 0) {
+                                    foreach ($query_run as $estudantes) {
+                                        ?>
+                                        <tr>
+                                            <td><?= $estudantes['id'] ?></td>
+                                            <td><?= $estudantes['name'] ?></td>
+                                            <td><?= $estudantes['email'] ?></td>
+                                            <td><?= $estudantes['phone'] ?></td>
+                                            <td><?= $estudantes['course'] ?></td>
+
+                                            <td>
+                                                <a href="" class="btn btn-secondary btn-sm">Vizualizar Aluno</a>
+                                                <a href="" class="btn btn-primary btn-sm">Atualizar Aluno</a>
+                                                <a href="" class="btn btn-danger btn-sm">Excluir Aluno</a>
+                                            </td>
+                                        </tr>
+
+                                        <?php
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
