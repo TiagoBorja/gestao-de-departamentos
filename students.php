@@ -12,13 +12,13 @@
 </head>
 
 <body>
-
+    <!-- Adicionar estudantes -->
     <div class="modal fade" id="studentAddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Novo Estudante</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </div>
                 <form id="saveStudent">
                     <div class="modal-body">
@@ -52,6 +52,46 @@
             </div>
         </div>
     </div>
+    <!-- Atualizar estudantes -->
+    <div class="modal fade" id="studentEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Atualizar Estudante</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="updateStudent">
+                    <div class="modal-body">
+
+                        <div class="alert alert-warning d-none" id="errorMessageUpdate">
+                        </div>
+                        <input type="hidden" name="student_id" id="student_id">
+                        <div class="mb-3">
+                            <label>Nome</label>
+                            <input type="text" name="name" id="name" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label>Email</label>
+                            <input type="email" name="email" id="email" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label>Telemóvel</label>
+                            <input type="text" name="phone" id="phone" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label>Curso</label>
+                            <input type="text" name="course" id="course" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-success">Confirmar</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
 
     <div class="container mt-5">
         <div class="row">
@@ -67,7 +107,7 @@
                         </h4>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered table-striped">
+                        <table id="myTable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -96,7 +136,8 @@
 
                                             <td>
                                                 <a href="" class="btn btn-secondary btn-sm">Vizualizar Aluno</a>
-                                                <a href="" class="btn btn-primary btn-sm">Atualizar Aluno</a>
+                                                <button type="button" value="<?= $estudantes['id']; ?>"
+                                                    class="editStudentBtn btn btn-primary btn-sm">Atualizar Aluno</button>
                                                 <a href="" class="btn btn-danger btn-sm">Excluir Aluno</a>
                                             </td>
                                         </tr>
@@ -144,10 +185,73 @@
                         $('#errorMessage').addClass('d-none');
                         $('#studentAddModal').modal('hide');
                         $('#saveStudent')[0].reset();
+
+                        $('#myTable').load(location.href + " #myTable");
                     }
                 }
-            })
-        })
+            });
+        });
+
+        $(document).on('click', '.editStudentBtn', function (e) {
+
+            var student_id = $(this).val();
+            // alert(student_id);
+
+            $.ajax({
+                type: "GET",
+                url: "code.php?student_id=" + student_id,
+                success: function (response) {
+                    var resultado = jQuery.parseJSON(response);
+
+                    if (resultado.status == 404) {
+                        alert(resultado.message);
+                    } else if (resultado.status == 422) {
+
+                        $('#student_id').val(resultado.data.id);
+                        $('#name').val(resultado.data.name);
+                        $('#email').val(resultado.data.email);
+                        $('#phone').val(resultado.data.phone);
+                        $('#course').val(resultado.data.course);
+                        $('#studentEditModal').modal('show');
+                    }
+                }
+
+            });
+        });
+
+        $(document).on('submit', '#updateStudent', function (e) {
+            e.preventDefault();
+
+            //Cria um objeto formdata com os dados do formulario.
+            var formData = new FormData(this);
+
+            //Acrescenta aos dados do formulário o parâmetro como true.
+            formData.append("update_student", true);
+            $.ajax({
+                type: "POST",
+                url: "code.php",
+                data: formData,
+                processData: false,
+                contentType: false,
+
+                //Em caso de sucesso, recebe em 'response' os dodos devolvidos pelo servidor.
+                success: function (response) {
+                    var resultado = jQuery.parseJSON(response);
+
+                    if (resultado.status == 422) {
+                        $('#errorMessageUpdate').removeClass('d-none');
+                        $('#errorMessageUpdate').text(resultado.message);
+                    } else if (resultado.status == 200) {
+
+                        $('#errorMessageUpdate').addClass('d-none');
+                        $('#studentEditModal').modal('hide');
+                        $('#saveStudent')[0].reset();
+
+                        $('#myTable').load(location.href + " #myTable");
+                    }
+                }
+            });
+        });
     </script>
 </body>
 
