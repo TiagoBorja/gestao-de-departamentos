@@ -93,6 +93,38 @@
         </div>
     </div>
 
+    <!-- Vizualizar estudantes -->
+    <div class="modal fade" id="studentViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Informações Estudante</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label>Nome</label>
+                        <p id="view_name" class="form-control"></p>
+                    </div>
+                    <div class="mb-3">
+                        <label>Email</label>
+                        <p id="view_email" class="form-control"></p>
+                    </div>
+                    <div class="mb-3">
+                        <label>Telemóvel</label>
+                        <p id="view_phone" class="form-control"></p>
+                    </div>
+                    <div class="mb-3">
+                        <label>Curso</label>
+                        <p id="view_course" class="form-control"></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">
@@ -135,7 +167,8 @@
                                             <td><?= $estudantes['course'] ?></td>
 
                                             <td>
-                                                <a href="" class="btn btn-secondary btn-sm">Vizualizar Aluno</a>
+                                                <button type="button" value="<?= $estudantes['id']; ?>"
+                                                    class="viewStudentBtn btn btn-secondary btn-sm">Vizualizar Aluno</button>
                                                 <button type="button" value="<?= $estudantes['id']; ?>"
                                                     class="editStudentBtn btn btn-primary btn-sm">Atualizar Aluno</button>
                                                 <a href="" class="btn btn-danger btn-sm">Excluir Aluno</a>
@@ -250,6 +283,31 @@
                         $('#myTable').load(location.href + " #myTable");
                     }
                 }
+            });
+        });
+        $(document).on('click', '.viewStudentBtn', function (e) {
+
+            var student_id = $(this).val();
+            // alert(student_id);
+
+            $.ajax({
+                type: "GET",
+                url: "code.php?student_id=" + student_id,
+                success: function (response) {
+                    var resultado = jQuery.parseJSON(response);
+
+                    if (resultado.status == 404) {
+                        alert(resultado.message);
+                    } else if (resultado.status == 422) {
+
+                        $('#view_name').text(resultado.data.name);
+                        $('#view_email').text(resultado.data.email);
+                        $('#view_phone').text(resultado.data.phone);
+                        $('#view_course').text(resultado.data.course);
+                        $('#studentViewModal').modal('show');
+                    }
+                }
+
             });
         });
     </script>
