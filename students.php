@@ -7,7 +7,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.rtl.min.css" />
     <title>Crud Ajax</title>
 </head>
 
@@ -190,6 +190,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
 
     <script>
         $(document).on('submit', '#saveStudent', function (e) {
@@ -220,6 +221,9 @@
                         $('#studentAddModal').modal('hide');
                         $('#saveStudent')[0].reset();
 
+                        alertify.success(resultado.message);
+
+
                         $('#myTable').load(location.href + " #myTable");
                     }
                 }
@@ -246,6 +250,9 @@
                         $('#email').val(resultado.data.email);
                         $('#phone').val(resultado.data.phone);
                         $('#course').val(resultado.data.course);
+
+                        alertify.success(resultado.message);
+
                         $('#studentEditModal').modal('show');
                     }
                 }
@@ -280,6 +287,7 @@
                         $('#errorMessageUpdate').addClass('d-none');
                         $('#studentEditModal').modal('hide');
                         $('#saveStudent')[0].reset();
+                        alertify.success(resultado.message);
 
                         $('#myTable').load(location.href + " #myTable");
                     }
@@ -305,6 +313,9 @@
                         $('#view_email').text(resultado.data.email);
                         $('#view_phone').text(resultado.data.phone);
                         $('#view_course').text(resultado.data.course);
+
+                        alertify.success(resultado.message);
+
                         $('#studentViewModal').modal('show');
                     }
                 }
@@ -334,7 +345,7 @@
                         } else {
 
                             alert(resultado.message);
-
+                            alertify.success(resultado.message);
                             $("#myTable").load(location.href + " #myTable");
                         }
                     }
