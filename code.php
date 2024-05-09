@@ -72,7 +72,6 @@ if (isset($_POST['update_student'])) {
     }
 }
 
-
 if (isset($_POST['save_student'])) {
     $nome = mysqli_real_escape_string($con, $_POST['name']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
@@ -107,6 +106,34 @@ if (isset($_POST['save_student'])) {
         $resultado = [
             'status' => 500,
             'message' => "O estudante não foi criado com sucesso."
+        ];
+        echo json_encode($resultado);
+        return false;
+    }
+}
+
+if (isset($_POST['delete_student'])) {
+    $id = mysqli_real_escape_string($con, $_POST['student_id']);
+
+
+    $query = "DELETE FROM students
+              WHERE id = $id ";
+
+    $query_run = mysqli_query($con, $query);
+
+    if ($query_run) {
+        //Caso ocorra tudo bem, o estudante é atualizado e o utilizador recebe uma mensagem confirmando.
+        $resultado = [
+            'status' => 200,
+            'message' => "Estudante excluido com sucesso."
+        ];
+        echo json_encode($resultado);
+        return false;
+    } else {
+        //Caso ocorra algum problema interno no servidor, não será feito nada e o utilizador irá ser notificado. 
+        $resultado = [
+            'status' => 500,
+            'message' => "O estudante não foi excluido com sucesso."
         ];
         echo json_encode($resultado);
         return false;

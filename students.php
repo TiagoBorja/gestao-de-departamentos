@@ -92,7 +92,6 @@
             </div>
         </div>
     </div>
-
     <!-- Vizualizar estudantes -->
     <div class="modal fade" id="studentViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -125,6 +124,7 @@
             </div>
         </div>
     </div>
+
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">
@@ -171,7 +171,8 @@
                                                     class="viewStudentBtn btn btn-secondary btn-sm">Vizualizar Aluno</button>
                                                 <button type="button" value="<?= $estudantes['id']; ?>"
                                                     class="editStudentBtn btn btn-primary btn-sm">Atualizar Aluno</button>
-                                                <a href="" class="btn btn-danger btn-sm">Excluir Aluno</a>
+                                                <button type="button" value="<?= $estudantes['id']; ?>"
+                                                    class="deleteStudentBtn btn btn-danger btn-sm">Excluir Aluno</button>
                                             </td>
                                         </tr>
 
@@ -310,6 +311,41 @@
 
             });
         });
+        $(document).on('click', '.deleteStudentBtn', function (e) {
+            e.preventDefault();
+
+            if (confirm("Tem certeza de que deseja excluir este aluno?")) {
+
+                var student_id = $(this).val();
+                $.ajax({
+                    type: "POST",
+                    url: "code.php",
+                    data: {
+                        'delete_student': true,
+                        'student_id': student_id
+                    },
+
+                    //Em caso de sucesso, recebe em 'response' os dodos devolvidos pelo servidor.
+                    success: function (response) {
+                        var resultado = jQuery.parseJSON(response);
+
+                        if (resultado.status == 500) {
+                            alert(resultado.message);
+                        } else {
+
+                            alert(resultado.message);
+
+                            $("#myTable").load(location.href + " #myTable");
+                        }
+                    }
+                });
+
+            }
+
+
+        });
+
+
     </script>
 </body>
 
