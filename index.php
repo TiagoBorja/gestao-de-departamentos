@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+require_once './db/dbcon.php';
 $pagina = 0;
 if (isset($_GET["pagina"]))
     $pagina = $_GET["pagina"];
