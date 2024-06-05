@@ -53,10 +53,10 @@ if (isset($_GET['id_funcionario'])) {
 
 if (isset($_POST['save_funcionario'])) {
 
-    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $data_nascimento = filter_input(INPUT_POST, 'data_nascimento', FILTER_SANITIZE_STRING);
-    $morada = filter_input(INPUT_POST, 'morada', FILTER_SANITIZE_STRING);
+    $data_nascimento = filter_input(INPUT_POST, 'data_nascimento', FILTER_SANITIZE_SPECIAL_CHARS);
+    $morada = filter_input(INPUT_POST, 'morada', FILTER_SANITIZE_SPECIAL_CHARS);
     $departamento_id = filter_input(INPUT_POST, 'departamento', FILTER_VALIDATE_INT);
 
     if ($nome != "" && $email != "" && $data_nascimento != "" && $morada != "" && $departamento_id != "") {
@@ -109,10 +109,10 @@ if (isset($_POST['save_funcionario'])) {
 
 if (isset($_POST['update_funcionario'])) {
     $id = $_POST['id_funcionario'];
-    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $data_nascimento = filter_input(INPUT_POST, 'data_nascimento', FILTER_SANITIZE_STRING);
-    $morada = filter_input(INPUT_POST, 'morada', FILTER_SANITIZE_STRING);
+    $data_nascimento = filter_input(INPUT_POST, 'data_nascimento', FILTER_SANITIZE_SPECIAL_CHARS);
+    $morada = filter_input(INPUT_POST, 'morada', FILTER_SANITIZE_SPECIAL_CHARS);
     $departamento_id = filter_input(INPUT_POST, 'departamento', FILTER_VALIDATE_INT);
 
     if ($nome != "" && $email != "" && $data_nascimento != "" && $morada != "" && $departamento_id != "") {
@@ -189,4 +189,3 @@ if (isset($_POST['delete_funcionario'])) {
         return;
     }
 }
-?>

@@ -8,7 +8,7 @@ $(document).ready(function () {
 
     $.ajax({
       type: "POST",
-      url: "../db/departamento/code.php",
+      url: "./departamento/code.php",
       data: formData,
       processData: false,
       contentType: false,

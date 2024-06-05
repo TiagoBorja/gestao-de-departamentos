@@ -28,7 +28,12 @@ CREATE TABLE IF NOT EXISTS `departamento` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Exportação de dados não seleccionada.
+-- A despejar dados para tabela empresa_final_tiago.departamento: ~4 rows (aproximadamente)
+INSERT INTO `departamento` (`id`, `nome`) VALUES
+	(1, 'Departamento de Contabilidade'),
+	(2, 'Departamento de Informática'),
+	(3, 'Departamento de Recursos Humanos'),
+	(4, 'Departamento Financeiro');
 
 -- A despejar estrutura para tabela empresa_final_tiago.funcionario
 DROP TABLE IF EXISTS `funcionario`;
@@ -44,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `funcionario` (
   CONSTRAINT `FK_funcionario_departamento` FOREIGN KEY (`id_departamento`) REFERENCES `departamento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Exportação de dados não seleccionada.
+-- A despejar dados para tabela empresa_final_tiago.funcionario: ~0 rows (aproximadamente)
 
 -- A despejar estrutura para tabela empresa_final_tiago.users
 DROP TABLE IF EXISTS `users`;
@@ -57,7 +62,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Exportação de dados não seleccionada.
+-- A despejar dados para tabela empresa_final_tiago.users: ~1 rows (aproximadamente)
+INSERT INTO `users` (`id`, `nome`, `username`, `password`, `tipo`) VALUES
+	(2, 'Tiago Rodrigues', 'Admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'A');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

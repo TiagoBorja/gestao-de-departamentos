@@ -23,7 +23,6 @@
                 </div>
             </form>
         </div>
-
     </div>
 </div>
 
@@ -84,8 +83,7 @@
 </div>
 
 <!-- Excluir Departamento -->
-<div class="modal fade" id="departamentoDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="departamentoDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -109,20 +107,20 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                         <button type="submit" class="btn btn-danger">Excluir</button>
                     </div>
+                </div>
             </form>
 
         </div>
     </div>
 </div>
 
-<div class="container mt-5">
+<div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <h4>Detalhes Departamento
-                        <button type="button" class="btn btn-success float-end" data-bs-toggle="modal"
-                            data-bs-target="#departamentoAddModal">
+                        <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#departamentoAddModal">
                             Novo
                         </button>
                     </h4>
@@ -140,16 +138,16 @@
                         <tbody>
                             <?php
                             require 'db/departamento/carregarDepartamentos.php';
-
                             ?>
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -160,6 +158,4 @@
 <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
 
-
-
-<script src="js/departamento.js"></script>
+<script src="./js/departamento.js"></script>

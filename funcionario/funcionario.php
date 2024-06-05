@@ -165,8 +165,7 @@
 </div>
 
 <!-- Excluir funcionario -->
-<div class="modal fade" id="funcionarioDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="funcionarioDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -219,8 +218,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4>Detalhes Funcionários
-                        <button type="button" class="btn btn-success float-end" data-bs-toggle="modal"
-                            data-bs-target="#funcionarioAddModal">
+                        <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#funcionarioAddModal">
                             Novo
                         </button>
                     </h4>
@@ -260,7 +258,7 @@
                                 // Verificar se há funcionários
                                 if (count($funcionarios) > 0) {
                                     foreach ($funcionarios as $funcionario) {
-                                        ?>
+                            ?>
                                         <tr>
                                             <td><?= $funcionario['id']; ?></td>
                                             <td><?= $funcionario['nome']; ?></td>
@@ -270,15 +268,12 @@
                                             <td><?= $departamentos_map[$funcionario['id_departamento']] ?? 'Departamento desconhecido'; ?>
                                             </td>
                                             <td>
-                                                <button type="button" value="<?= $funcionario['id']; ?>"
-                                                    class="viewFuncionarioBtn btn btn-secondary btn-sm">Visualizar</button>
-                                                <button type="button" value="<?= $funcionario['id']; ?>"
-                                                    class="editFuncionarioBtn btn btn-primary btn-sm">Atualizar</button>
-                                                <button type="button" value="<?= $funcionario['id']; ?>"
-                                                    class="deleteFuncionarioBtn btn btn-danger btn-sm">Excluir</button>
+                                                <button type="button" value="<?= $funcionario['id']; ?>" class="viewFuncionarioBtn btn btn-secondary btn-sm">Visualizar</button>
+                                                <button type="button" value="<?= $funcionario['id']; ?>" class="editFuncionarioBtn btn btn-primary btn-sm">Atualizar</button>
+                                                <button type="button" value="<?= $funcionario['id']; ?>" class="deleteFuncionarioBtn btn btn-danger btn-sm">Excluir</button>
                                             </td>
                                         </tr>
-                                        <?php
+                            <?php
                                     }
                                 } else {
                                     echo "<tr><td colspan='7'>Nenhum funcionário encontrado</td></tr>";
@@ -304,7 +299,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
-
-
 
 <script src="js/funcionario.js"></script>
