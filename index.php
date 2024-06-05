@@ -2,6 +2,13 @@
 session_start();
 
 require_once './db/dbcon.php';
+
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 $pagina = 0;
 if (isset($_GET["pagina"]))
     $pagina = $_GET["pagina"];
@@ -64,6 +71,9 @@ else {
                     $page_file = "./home.php";
                     break;
 
+                case 1:
+                    $page_file = "./departamento/departamento.php";
+                    break;
                 case 2:
                     $page_file = "./funcionario/funcionario.php";
                     break;

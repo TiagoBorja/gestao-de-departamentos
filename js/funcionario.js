@@ -173,4 +173,6 @@ $(document).on("submit", "#deleteFuncionario", function (e) {
   });
 });
 
-new DataTable("#myTable");
+$(document).ready(function () {
+  $("#myTable").DataTable();
+});
