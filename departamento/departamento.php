@@ -37,7 +37,7 @@
             <form id="updateDepartamento">
                 <div class="modal-body">
                     <div class="alert alert-warning d-none" id="errorMessage"></div>
-                    <input type="hidden" name="id_departamento" id="id_departamento">
+                    <input type="text" name="id_departamento" id="id_departamento">
                     <div class="mb-3">
                         <label class="form-label">Nome</label>
                         <input type="text" id="nome" name="nome" class="form-control" required>
@@ -83,7 +83,8 @@
 </div>
 
 <!-- Excluir Departamento -->
-<div class="modal fade" id="departamentoDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="departamentoDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -120,7 +121,8 @@
             <div class="card">
                 <div class="card-header">
                     <h4>Detalhes Departamento
-                        <button type="button" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#departamentoAddModal">
+                        <button type="button" class="btn btn-success float-end" data-bs-toggle="modal"
+                            data-bs-target="#departamentoAddModal">
                             Novo
                         </button>
                     </h4>

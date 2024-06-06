@@ -35,7 +35,7 @@ $(document).ready(function () {
 
     $.ajax({
       type: "GET",
-      url: "../db/departamento/code.php?id_departamento=" + id_departamento,
+      url: "./departamento/code.php?id_departamento=" + id_departamento,
       success: function (response) {
         var resultado = jQuery.parseJSON(response);
         if (resultado.status == 404) {
@@ -55,7 +55,7 @@ $(document).ready(function () {
 
     $.ajax({
       type: "GET",
-      url: "../db/departamento/code.php?id_departamento=" + id_departamento,
+      url: "./departamento/code.php?id_departamento=" + id_departamento,
       success: function (response) {
         var resultado = jQuery.parseJSON(response);
         if (resultado.status == 404) {
@@ -78,7 +78,7 @@ $(document).ready(function () {
 
     $.ajax({
       type: "POST",
-      url: "../db/departamento/code.php",
+      url: "./departamento/code.php",
       data: formData,
       processData: false,
       contentType: false,
@@ -105,7 +105,7 @@ $(document).ready(function () {
 
     $.ajax({
       type: "GET",
-      url: "../db/departamento/code.php?id_departamento=" + id_departamento,
+      url: "./departamento/code.php?id_departamento=" + id_departamento,
       success: function (response) {
         var resultado = jQuery.parseJSON(response);
         if (resultado.status == 404) {
@@ -128,7 +128,7 @@ $(document).ready(function () {
 
     $.ajax({
       type: "POST",
-      url: "../db/departamento/code.php",
+      url: "./departamento/code.php",
       data: formData,
       processData: false,
       contentType: false,

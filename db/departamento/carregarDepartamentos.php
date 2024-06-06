@@ -11,17 +11,20 @@ try {
     // Verificar se há departamentos
     if (count($departamentos) > 0) {
         foreach ($departamentos as $departamento) {
-?>
+            ?>
             <tr>
-                <td><?= htmlspecialchars($departamento['id']); ?></td>
-                <td><?= htmlspecialchars($departamento['nome']); ?></td>
+                <td><?= $departamento['id']; ?></td>
+                <td><?= $departamento['nome']; ?></td>
                 <td>
-                    <button type="button" value="<?= $departamento['id']; ?>" class="viewDepartamentoBtn btn btn-secondary btn-sm">Visualizar</button>
-                    <button type="button" value="<?= $departamento['id']; ?>" class="editDepartamentoBtn btn btn-primary btn-sm">Atualizar</button>
-                    <button type="button" value="<?= $departamento['id']; ?>" class="deleteDepartamentoBtn btn btn-danger btn-sm">Excluir</button>
+                    <button type="button" value="<?= $departamento['id']; ?>"
+                        class="viewDepartamentoBtn btn btn-secondary btn-sm">Visualizar</button>
+                    <button type="button" value="<?= $departamento['id']; ?>"
+                        class="editDepartamentoBtn btn btn-primary btn-sm">Atualizar</button>
+                    <button type="button" value="<?= $departamento['id']; ?>"
+                        class="deleteDepartamentoBtn btn btn-danger btn-sm">Excluir</button>
                 </td>
             </tr>
-<?php
+            <?php
         }
     } else {
         echo "<tr><td colspan='3'>Nenhum departamento encontrado</td></tr>";
