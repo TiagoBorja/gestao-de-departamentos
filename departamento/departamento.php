@@ -37,10 +37,10 @@
             <form id="updateDepartamento">
                 <div class="modal-body">
                     <div class="alert alert-warning d-none" id="errorMessage"></div>
-                    <input type="text" name="id_departamento" id="id_departamento">
+                    <input type="text" name="edit_id_departamento" id="edit_id_departamento">
                     <div class="mb-3">
                         <label class="form-label">Nome</label>
-                        <input type="text" id="nome" name="nome" class="form-control" required>
+                        <input type="text" id="edit_nome" name="edit_nome" class="form-control" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -67,11 +67,11 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Nome</label>
+                    <label class="form-label">Código Departamento</label>
                     <p id="view_id" class="form-control"></p>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Email</label>
+                    <label class="form-label">Nome</label>
                     <p id="view_departamento" class="form-control"></p>
                 </div>
                 <div class="modal-footer">
@@ -98,7 +98,7 @@
                     <div class="alert alert-warning d-none" id="errorMessage">
                     </div>
 
-                    <input type="text" name="id_departamento" id="id_departamento">
+                    <input type="text" name="delete_id_departamento" id="delete_id_departamento">
 
                     <div class="mb-3">
                         <label class="form-label">Nome</label>

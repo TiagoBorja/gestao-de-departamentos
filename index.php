@@ -24,9 +24,23 @@ $page_file = "";
     <title>Exercícios RC</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.rtl.min.css" />
 
+    <style>
+        body {
+            margin-bottom: 50px;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+        }
+    </style>
 </head>
 
 <body>
@@ -35,7 +49,7 @@ $page_file = "";
     if (!isset($_SESSION['user']))
         require "./pag/login.php";
     else {
-    ?>
+        ?>
         <div class="p-5 bg-primary text-white text-center">
             <h1>Técnico de Gestão e Programação de Sistemas de Informação</h1>
             <p>
@@ -53,13 +67,16 @@ $page_file = "";
                         <a class="nav-link <?php echo ($pagina == 0) ? "active" : ""; ?>" href="./?pagina=0">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo ($pagina == 1) ? "active" : ""; ?>" href="./?pagina=01">Departamentos</a>
+                        <a class="nav-link <?php echo ($pagina == 1) ? "active" : ""; ?>"
+                            href="./?pagina=01">Departamentos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo ($pagina == 2) ? "active" : ""; ?>" href="./?pagina=02">Funcionários</a>
+                        <a class="nav-link <?php echo ($pagina == 2) ? "active" : ""; ?>"
+                            href="./?pagina=02">Funcionários</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo ($pagina == 3) ? "active" : ""; ?>" href="./?pagina=02">Utilizadores</a>
+                        <a class="nav-link <?php echo ($pagina == 3) ? "active" : ""; ?>"
+                            href="./?pagina=02">Utilizadores</a>
                     </li>
                 </ul>
 
@@ -96,16 +113,16 @@ $page_file = "";
                     break;
             }
             if (!file_exists($page_file))
-                include("./pag/not_found.php");
+                include ("./pag/not_found.php");
             else
-                include($page_file);
+                include ($page_file);
             ?>
         </div>
 
         <div class="footer mt-5 p-4 bg-primary text-white text-center">
             <p>&copy; 2024 - Tiago Rodrigues</p>
         </div>
-    <?php
+        <?php
     }
     ?>
 </body>

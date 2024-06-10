@@ -98,4 +98,98 @@ if (isset($_POST['save_departamento'])) {
     }
 }
 
+if (isset($_POST['update_departamento'])) {
+
+    $id = filter_input(INPUT_POST, 'edit_id_departamento', FILTER_SANITIZE_SPECIAL_CHARS);
+    $nome = filter_input(INPUT_POST, 'edit_nome', FILTER_SANITIZE_SPECIAL_CHARS);
+
+
+    if (!empty($nome)) {
+        $query = "UPDATE departamento 
+                  SET nome = :nome
+                  WHERE id = :id";
+        $query_run = $pdo->prepare($query);
+
+        $data = [
+            ':nome' => $nome,
+            ':id' => $id,
+        ];
+
+        try {
+            $query_execute = $query_run->execute($data);
+
+            if ($query_execute) {
+                $resultado = [
+                    'status' => 200,
+                    'message' => "Departamento atualizado com sucesso."
+                ];
+                echo json_encode($resultado);
+                return;
+            } else {
+                $resultado = [
+                    'status' => 500,
+                    'message' => "O departamento não foi criado com sucesso."
+                ];
+                echo json_encode($resultado);
+                return;
+            }
+        } catch (PDOException $e) {
+            $resultado = [
+                'status' => 500,
+                'message' => "Erro ao inserir: " . $e->getMessage()
+            ];
+            echo json_encode($resultado);
+            return;
+        }
+    } else {
+        $resultado = [
+            'status' => 422,
+            'message' => "Preencha todos os campos antes de prosseguir."
+        ];
+        echo json_encode($resultado);
+        return;
+    }
+}
+
+if (isset($_POST['delete_departamento'])) {
+
+    $id = filter_input(INPUT_POST, 'delete_id_departamento', FILTER_SANITIZE_SPECIAL_CHARS);
+    $nome = filter_input(INPUT_POST, 'delete_nome', FILTER_SANITIZE_SPECIAL_CHARS);
+
+    $query = "DELETE FROM departamento 
+                  WHERE id = :id";
+    $query_run = $pdo->prepare($query);
+
+    $data = [
+        ':id' => $id,
+    ];
+
+    try {
+        $query_execute = $query_run->execute($data);
+
+        if ($query_execute) {
+            $resultado = [
+                'status' => 200,
+                'message' => "Departamento excluido com sucesso."
+            ];
+            echo json_encode($resultado);
+            return;
+        } else {
+            $resultado = [
+                'status' => 500,
+                'message' => "O departamento não foi criado com sucesso."
+            ];
+            echo json_encode($resultado);
+            return;
+        }
+    } catch (PDOException $e) {
+        $resultado = [
+            'status' => 500,
+            'message' => "Erro ao inserir: " . $e->getMessage()
+        ];
+        echo json_encode($resultado);
+        return;
+    }
+
+}
 
