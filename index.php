@@ -76,7 +76,7 @@ $page_file = "";
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php echo ($pagina == 3) ? "active" : ""; ?>"
-                            href="./?pagina=02">Utilizadores</a>
+                            href="./?pagina=03">Utilizadores</a>
                     </li>
                 </ul>
 
@@ -102,6 +102,9 @@ $page_file = "";
                     break;
                 case 2:
                     $page_file = "./funcionario/funcionario.php";
+                    break;
+                case 3:
+                    $page_file = "./utilizador/utilizador.php";
                     break;
 
                 case 900:
