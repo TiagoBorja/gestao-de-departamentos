@@ -21,7 +21,7 @@ $page_file = "";
 <html lang="pt">
 
 <head>
-    <title>Exercícios RC</title>
+    <title>Exercício Final</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -51,12 +51,12 @@ $page_file = "";
     else {
         ?>
         <div class="p-5 bg-primary text-white text-center">
-            <h1>Técnico de Gestão e Programação de Sistemas de Informação</h1>
+            <h1>Programação de Sistemas de Informação</h1>
             <p>
             <h3>Redes de Comunicação</h3>
             </p>
             <p>
-            <h4>M5 - Criação de páginas web dinâmicas<h4>
+            <h4>M7 - Acesso a bases de dados via Web<h4>
                     </p>
         </div>
 
@@ -94,7 +94,7 @@ $page_file = "";
             <?php
             switch ($pagina) {
                 case 0:
-                    $page_file = "./home.php";
+                    $page_file = "./pag/home.php";
                     break;
 
                 case 1:
@@ -122,7 +122,7 @@ $page_file = "";
             ?>
         </div>
 
-        <div class="footer mt-5 p-4 bg-primary text-white text-center">
+        <div class="footer mt-5 p-4 bg-dark text-white text-center">
             <p>&copy; 2024 - Tiago Rodrigues</p>
         </div>
         <?php

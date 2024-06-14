@@ -198,42 +198,40 @@
     </div>
 </div>
 
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Detalhes Funcionários
-                        <button type="button" class="btn btn-success float-end" data-bs-toggle="modal"
-                            data-bs-target="#utilizadorAddModal">
-                            Novo
-                        </button>
-                    </h4>
-                </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Detalhes Funcionários
+                    <button type="button" class="btn btn-success float-end" data-bs-toggle="modal"
+                        data-bs-target="#utilizadorAddModal">
+                        Novo
+                    </button>
+                </h4>
+            </div>
 
-                <div class="card-body">
-                    <table id="myTable" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nome</th>
-                                <th>Username</th>
-                                <th>Tipo</th>
-                                <th>Ação</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            require 'db/utilizador/carregarUtilizador.php';
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
-
+            <div class="card-body">
+                <table id="myTable" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Username</th>
+                            <th>Tipo</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        require 'db/utilizador/carregarUtilizador.php';
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

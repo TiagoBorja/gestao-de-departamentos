@@ -115,39 +115,38 @@
     </div>
 </div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Detalhes Departamento
-                        <button type="button" class="btn btn-success float-end" data-bs-toggle="modal"
-                            data-bs-target="#departamentoAddModal">
-                            Novo
-                        </button>
-                    </h4>
-                </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Detalhes Departamento
+                    <button type="button" class="btn btn-success float-end" data-bs-toggle="modal"
+                        data-bs-target="#departamentoAddModal">
+                        Novo
+                    </button>
+                </h4>
+            </div>
 
-                <div class="card-body">
-                    <table id="myTable" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nome</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            require 'db/departamento/carregarDepartamentos.php';
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="card-body">
+                <table id="myTable" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        require 'db/departamento/carregarDepartamentos.php';
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
+
 
 
 
