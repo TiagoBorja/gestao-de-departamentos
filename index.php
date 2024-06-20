@@ -33,6 +33,10 @@ $page_file = "";
             margin-bottom: 50px;
         }
 
+        a {
+            text-decoration: none;
+        }
+
         .footer {
             position: fixed;
             left: 0;

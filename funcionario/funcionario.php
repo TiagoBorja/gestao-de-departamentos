@@ -198,7 +198,7 @@
             <form id="deleteFuncionario">
                 <div class="modal-body">
                     <div class="alert alert-warning d-none" id="errorMessage"></div>
-                    <input type="text" name="id_funcionario" id="id_funcionario">
+                    <input type="hidden" name="id_funcionario" id="id_funcionario">
 
                     <div class="mb-3">
                         <label class="form-label">Nome</label>

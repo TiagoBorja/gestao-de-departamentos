@@ -1,9 +1,15 @@
 <?php
-$coddep = 0;
-$filtrocd = "";
+$coddep = $codfunc = 0;
+$filtro_cd = $filtro_func = "";
+
 if (isset($_GET['cod_departamento'])) {
     $coddep = $_GET["cod_departamento"];
-    $filtrocd = " WHERE id_departamento = " . $coddep;
+    $filtro_cd = " WHERE id_departamento = " . $coddep;
+}
+
+if (isset($_GET['cod_funcionario'])) {
+    $codfunc = $_GET['cod_funcionario'];
+    $filtro_func = " WHERE id = " . $codfunc;
 }
 ?>
 
@@ -15,29 +21,29 @@ if (isset($_GET['cod_departamento'])) {
 
             <li class="list-group-item list-group-item-action"><a href="./">Todos</a></li>
             <?php
+            // Consulta para obter os departamentos
             $query = "SELECT * FROM departamento";
-
             $query_run = $pdo->prepare($query);
 
             try {
-                // Obter dados dos departamentos
                 $query_run->execute();
                 $departamentos = $query_run->fetchAll(PDO::FETCH_ASSOC);
 
-                // Verificar se há departamentos
                 if (count($departamentos) > 0) {
                     foreach ($departamentos as $departamento) {
                         ?>
-                        <li class="list-group-item list-group-item-action"><a
-                                href="./?cod_departamento=<?= $departamento['id']; ?>"><?= $departamento['nome']; ?></a>
+                        <li class="list-group-item list-group-item-action">
+                            <a href="./?cod_departamento=<?= $departamento['id']; ?>">
+                                <?= $departamento['nome']; ?>
+                            </a>
                         </li>
                         <?php
                     }
                 } else {
-                    echo "<ul><li colspan='3'>Nenhum departamento encontrado</li></ul>";
+                    echo "<li class='list-group-item'>Nenhum departamento encontrado</li>";
                 }
             } catch (PDOException $e) {
-                echo "<ul><li colspan='3'>Erro ao buscar os departamentos: " . $e->getMessage() . "</li></ul>";
+                echo "<li class='list-group-item'>Erro ao buscar os departamentos: " . $e->getMessage() . "</li>";
             }
             ?>
         </ul>
@@ -47,39 +53,81 @@ if (isset($_GET['cod_departamento'])) {
         <hr>
         <ul class="list-group">
             <?php
-
             try {
-                // Obter dados dos funcionários
-                $stmt = $pdo->query("SELECT * FROM funcionario" . $filtrocd);
+                // Consulta para obter os funcionários filtrados
+                $stmt = $pdo->query("SELECT * FROM funcionario" . $filtro_cd . $filtro_func);
                 $funcionarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 // Obter dados dos departamentos
                 $stmt_departamento = $pdo->query("SELECT id, nome FROM departamento");
                 $departamentos = $stmt_departamento->fetchAll(PDO::FETCH_ASSOC);
 
-                //Variável responsavel pelo mapeamento dos deparmentos baseado no ID
+                // Variável responsável pelo mapeamento dos departamentos baseado no ID
                 $departamentos_map = [];
                 foreach ($departamentos as $departamento) {
                     $departamentos_map[$departamento['id']] = $departamento['nome'];
                 }
 
-                // Verificar se há funcionários
                 if (count($funcionarios) > 0) {
                     foreach ($funcionarios as $funcionario) {
                         ?>
-                        <li class="list-group-item list-group-item-action"><?= $funcionario['nome']; ?> -
-                            <?= $departamentos_map[$funcionario['id_departamento']] ?? 'Departamento desconhecido'; ?>
+                        <li class="list-group-item list-group-item-action">
+                            <a href="./?cod_funcionario=<?= $funcionario['id']; ?>">
+                                <?= $funcionario['nome']; ?>
+                            </a>
+                            -
+                            <?= $departamentos_map[$funcionario['id_departamento']]; ?>
                         </li>
                         <?php
                     }
                 } else {
-                    echo "<ul><li colspan='7'>Nenhum funcionário encontrado</li></ul>";
+                    echo "<li class='list-group-item'>Nenhum funcionário encontrado</li>";
                 }
             } catch (PDOException $e) {
-                echo "<ul><li colspan='7'>Erro ao buscar funcionários: " . $e->getMessage() . "</li></ul>";
+                echo "<li class='list-group-item'>Erro ao buscar funcionários: " . $e->getMessage() . "</li>";
             }
-
             ?>
         </ul>
+        <?php if ($codfunc > 0) { ?>
+            <div class="card mt-4">
+                <div class="card-header">
+                    Detalhes do Funcionário
+                </div>
+                <div class="card-body">
+                    <?php
+                    try {
+                        // Consulta para obter os detalhes do funcionário específico
+                        $stmt = $pdo->query("SELECT * FROM funcionario WHERE id = " . $codfunc);
+                        $funcionario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                        if ($funcionario) {
+                            ?>
+                            <p>
+                                <strong>Nome:</strong> <?= $funcionario['nome'] ?>
+                            </p>
+                            <p>
+                                <strong>Email:</strong> <?= $funcionario['email'] ?>
+                            </p>
+                            <p>
+                                <strong>Data de Nascimento:</strong> <?= $funcionario['data_nascimento'] ?>
+                            </p>
+                            <p>
+                                <strong>Morada:</strong> <?= $funcionario['morada'] ?>
+                            </p>
+                            <p>
+                                <strong>Departamento:</strong> <?= $departamentos_map[$funcionario['id_departamento']]; ?>
+                            </p>
+                            <a class="btn btn-secondary btn-sm float-end" href="./">Voltar</a>
+                            <?php
+                        } else {
+                            echo "<p>Funcionário não encontrado.</p>";
+                        }
+                    } catch (PDOException $e) {
+                        echo "<p>Erro ao buscar funcionário: " . $e->getMessage() . "</p>";
+                    }
+                    ?>
+                </div>
+            </div>
+        <?php } ?>
     </div>
 </div>
