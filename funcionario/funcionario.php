@@ -3,14 +3,12 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Novo</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title" id="exampleModalLabel">Novo Funcionário</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="saveFuncionario">
                 <div class="modal-body">
-
-                    <div class="alert alert-warning d-none" id="errorMessage">
-                    </div>
+                    <div class="alert alert-warning d-none" id="errorMessage"></div>
 
                     <div class="mb-3">
                         <label class="form-label">Nome</label>
@@ -26,79 +24,17 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Morada</label>
-                        <textarea type="text" name="morada" class="form-control" required></textarea>
-                    </div>
-                    <select class="form-select" name="departamento" required>
-                        <?php
-                        $query = "SELECT id, nome FROM departamento";
-                        $stmt = $pdo->prepare($query);
-
-                        try {
-                            $stmt->execute();
-                            $departamentos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                            if (count($departamentos) > 0) {
-                                foreach ($departamentos as $departamento) {
-                                    echo "<option value='" . htmlspecialchars($departamento['id']) . "'>" . htmlspecialchars($departamento['nome']) . "</option>";
-                                }
-                            } else {
-                                echo "<option value=''>Nenhum departamento encontrado</option>";
-                            }
-                        } catch (PDOException $e) {
-                            echo "<option value=''>Erro ao buscar departamentos: " . htmlspecialchars($e->getMessage()) . "</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="submit" class="btn btn-success">Confirmar</button>
-                </div>
-            </form>
-        </div>
-
-    </div>
-</div>
-
-<!-- Editar Funcionario -->
-<div class="modal fade" id="funcionarioEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Atualizar Funcionário</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="updateFuncionario">
-                <div class="modal-body">
-                    <div class="alert alert-warning d-none" id="errorMessage"></div>
-                    <input type="hidden" name="id_funcionario" id="id_funcionario">
-                    <div class="mb-3">
-                        <label class="form-label">Nome</label>
-                        <input type="text" id="nome" name="nome" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Email</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Data de Nascimento</label>
-                        <input type="date" id="data_nascimento" name="data_nascimento" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Morada</label>
-                        <textarea type="text" id="morada" name="morada" class="form-control" required></textarea>
+                        <textarea name="morada" class="form-control" required></textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Departamento</label>
-                        <select class="form-select" id="departamento" name="departamento" required>
+                        <select class="form-select" name="departamento" required>
                             <?php
                             $query = "SELECT * FROM departamento";
                             $stmt = $pdo->prepare($query);
-
                             try {
                                 $stmt->execute();
                                 $departamentos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
                                 if (count($departamentos) > 0) {
                                     foreach ($departamentos as $departamento) {
                                         echo "<option value='" . htmlspecialchars($departamento['id']) . "'>" . htmlspecialchars($departamento['nome']) . "</option>";
@@ -123,19 +59,104 @@
 </div>
 
 
+<!-- Editar Funcionario -->
+<div class="modal fade" id="funcionarioEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar Funcionário</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="updateFuncionario">
+                <div class="modal-body">
+                    <div class="alert alert-warning d-none" id="errorMessage"></div>
+                    <input type="hidden" name="id_funcionario" id="id_funcionario">
+                    <div class="mb-3">
+                        <label class="form-label">Nome</label>
+                        <input type="text" id="nome" name="nome" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Data de Nascimento</label>
+                        <input type="date" id="data_nascimento" name="data_nascimento" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Morada</label>
+                        <textarea id="morada" name="morada" class="form-control" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Departamento</label>
+                        <select class="form-select" id="departamento" name="departamento" required>
+                            <?php
+                            $query = "SELECT * FROM departamento";
+                            $stmt = $pdo->prepare($query);
+                            try {
+                                $stmt->execute();
+                                $departamentos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                if (count($departamentos) > 0) {
+                                    foreach ($departamentos as $departamento) {
+                                        echo "<option value='" . htmlspecialchars($departamento['id']) . "'>" . htmlspecialchars($departamento['nome']) . "</option>";
+                                    }
+                                } else {
+                                    echo "<option value=''>Nenhum departamento encontrado</option>";
+                                }
+                            } catch (PDOException $e) {
+                                echo "<option value=''>Erro ao buscar departamentos: " . htmlspecialchars($e->getMessage()) . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-success">Confirmar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!--  <?php
+// $query = "SELECT * FROM departamento";
+// $stmt = $pdo->prepare($query);
+
+// try {
+//     $stmt->execute();
+//     $departamentos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+//     if (count($departamentos) > 0) {
+//         foreach ($departamentos as $departamento) {
+//             echo "<option value='" . htmlspecialchars($departamento['id']) . "'>" . htmlspecialchars($departamento['nome']) . "</option>";
+//         }
+//     } else {
+//         echo "<option value=''>Nenhum departamento encontrado</option>";
+//     }
+// } catch (PDOException $e) {
+//     echo "<option value=''>Erro ao buscar departamentos: " . htmlspecialchars($e->getMessage()) . "</option>";
+// }
+?> -->
+
+
+
+
 <!-- Visualizar Funcionario -->
 <div class="modal fade" id="funcionarioViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Informações</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Visualizar Funcionário</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
-                <div class="alert alert-warning d-none" id="errorMessage">
-                </div>
-
+                <div class="alert alert-warning d-none" id="errorMessage"></div>
                 <div class="mb-3">
                     <label class="form-label">Nome</label>
                     <p id="view_nome" class="form-control"></p>
@@ -164,22 +185,19 @@
     </div>
 </div>
 
+
 <!-- Excluir funcionario -->
 <div class="modal fade" id="funcionarioDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Informações</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Excluir Funcionário</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
             <form id="deleteFuncionario">
                 <div class="modal-body">
-
-                    <div class="alert alert-warning d-none" id="errorMessage">
-                    </div>
-
+                    <div class="alert alert-warning d-none" id="errorMessage"></div>
                     <input type="text" name="id_funcionario" id="id_funcionario">
 
                     <div class="mb-3">
@@ -200,7 +218,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Departamento</label>
-                        <p id="delete_departamento" class="form-control"> </p>
+                        <p id="delete_departamento" class="form-control"></p>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -208,10 +226,10 @@
                     <button type="submit" class="btn btn-danger">Excluir</button>
                 </div>
             </form>
-
         </div>
     </div>
 </div>
+
 
 <div class="row">
     <div class="col-md-12">
@@ -239,9 +257,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        require 'db/funcionario/carregarFuncionario.php';
-                        ?>
+                        <?php require 'db/funcionario/carregarFuncionario.php'; ?>
                     </tbody>
                 </table>
             </div>
@@ -249,6 +265,7 @@
         </div>
     </div>
 </div>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

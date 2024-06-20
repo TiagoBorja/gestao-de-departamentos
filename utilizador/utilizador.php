@@ -145,7 +145,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4>Detalhes Funcionários
+                <h4>Detalhes Utilizador
                     <button type="button" class="btn btn-success float-end" data-bs-toggle="modal"
                         data-bs-target="#utilizadorAddModal">
                         Novo

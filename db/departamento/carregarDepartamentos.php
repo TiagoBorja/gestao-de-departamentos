@@ -13,14 +13,14 @@ try {
         foreach ($departamentos as $departamento) {
             ?>
             <tr>
-                <td><?= $departamento['id']; ?></td>
-                <td><?= $departamento['nome']; ?></td>
+                <td><?= htmlspecialchars($departamento['id']); ?></td>
+                <td><?= htmlspecialchars($departamento['nome']); ?></td>
                 <td>
-                    <button type="button" value="<?= $departamento['id']; ?>"
+                    <button type="button" value="<?= htmlspecialchars($departamento['id']); ?>"
                         class="viewDepartamentoBtn btn btn-secondary btn-sm">Visualizar</button>
-                    <button type="button" value="<?= $departamento['id']; ?>"
+                    <button type="button" value="<?= htmlspecialchars($departamento['id']); ?>"
                         class="editDepartamentoBtn btn btn-primary btn-sm">Atualizar</button>
-                    <button type="button" value="<?= $departamento['id']; ?>"
+                    <button type="button" value="<?= htmlspecialchars($departamento['id']); ?>"
                         class="deleteDepartamentoBtn btn btn-danger btn-sm">Excluir</button>
                 </td>
             </tr>
