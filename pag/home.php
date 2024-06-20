@@ -1,9 +1,9 @@
 <?php
 $coddep = 0;
 $filtrocd = "";
-if (isset($_GET['cd'])) {
-    $coddep = $_GET["cd"];
-    $filtrocd = " WHERE id_departamento=" . $coddep;
+if (isset($_GET['cod_departamento'])) {
+    $coddep = $_GET["cod_departamento"];
+    $filtrocd = " WHERE id_departamento = " . $coddep;
 }
 ?>
 
@@ -29,7 +29,7 @@ if (isset($_GET['cd'])) {
                     foreach ($departamentos as $departamento) {
                         ?>
                         <li class="list-group-item list-group-item-action"><a
-                                href="./?cd=<?= $departamento['id']; ?>"><?= $departamento['nome']; ?></a>
+                                href="./?cod_departamento=<?= $departamento['id']; ?>"><?= $departamento['nome']; ?></a>
                         </li>
                         <?php
                     }
