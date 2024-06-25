@@ -1,3 +1,8 @@
+<?php
+
+$AdmOuGestor = isset($_SESSION['user_tipo']) && ($_SESSION['user_tipo'] == 'A' || $_SESSION['user_tipo'] == 'G');
+?>
+
 <!-- Adicionar Funcionario -->
 <div class="modal fade" id="funcionarioAddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -88,25 +93,27 @@
                         <textarea id="morada" name="morada" class="form-control" required></textarea>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Departamento</label>
-                        <select class="form-select" id="departamento" name="departamento" required>
-                            <?php
-                            $query = "SELECT * FROM departamento";
-                            $stmt = $pdo->prepare($query);
-                            try {
-                                $stmt->execute();
-                                $departamentos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                                if (count($departamentos) > 0) {
-                                    foreach ($departamentos as $departamento) {
-                                        echo "<option value='" . htmlspecialchars($departamento['id']) . "'>" . htmlspecialchars($departamento['nome']) . "</option>";
+                        <?php if ($AdmOuGestor) { ?>
+                            <label class="form-label">Departamento</label>
+                            <select class="form-select" id="departamento" name="departamento" required>
+                                <?php
+                                $query = "SELECT * FROM departamento";
+                                $stmt = $pdo->prepare($query);
+                                try {
+                                    $stmt->execute();
+                                    $departamentos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                    if (count($departamentos) > 0) {
+                                        foreach ($departamentos as $departamento) {
+                                            echo "<option value='" . htmlspecialchars($departamento['id']) . "'>" . htmlspecialchars($departamento['nome']) . "</option>";
+                                        }
+                                    } else {
+                                        echo "<option value=''>Nenhum departamento encontrado</option>";
                                     }
-                                } else {
-                                    echo "<option value=''>Nenhum departamento encontrado</option>";
+                                } catch (PDOException $e) {
+                                    echo "<option value=''>Erro ao buscar departamentos: " . htmlspecialchars($e->getMessage()) . "</option>";
                                 }
-                            } catch (PDOException $e) {
-                                echo "<option value=''>Erro ao buscar departamentos: " . htmlspecialchars($e->getMessage()) . "</option>";
-                            }
-                            ?>
+                        }
+                        ?>
                         </select>
                     </div>
                 </div>
@@ -118,34 +125,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-<!--  <?php
-// $query = "SELECT * FROM departamento";
-// $stmt = $pdo->prepare($query);
-
-// try {
-//     $stmt->execute();
-//     $departamentos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-//     if (count($departamentos) > 0) {
-//         foreach ($departamentos as $departamento) {
-//             echo "<option value='" . htmlspecialchars($departamento['id']) . "'>" . htmlspecialchars($departamento['nome']) . "</option>";
-//         }
-//     } else {
-//         echo "<option value=''>Nenhum departamento encontrado</option>";
-//     }
-// } catch (PDOException $e) {
-//     echo "<option value=''>Erro ao buscar departamentos: " . htmlspecialchars($e->getMessage()) . "</option>";
-// }
-?> -->
-
-
-
 
 <!-- Visualizar Funcionario -->
 <div class="modal fade" id="funcionarioViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -247,12 +226,15 @@
                 <table id="myTable" class="table table-bordered table-striped">
                     <thead>
                         <tr>
+
                             <th>ID</th>
                             <th>Nome</th>
                             <th>Email</th>
                             <th>Data de Nascimento</th>
                             <th>Morada</th>
-                            <th>Departamento</th>
+                            <?php if ($AdmOuGestor) { ?>
+                                <th>Departamento</th>
+                            <?php } ?>
                             <th>Ação</th>
                         </tr>
                     </thead>

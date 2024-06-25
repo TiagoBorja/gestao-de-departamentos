@@ -1,5 +1,5 @@
 <?php
-
+$AdmOuGestor = isset($_SESSION['user_tipo']) && ($_SESSION['user_tipo'] == 'A' || $_SESSION['user_tipo'] == 'G');
 try {
     // Obter dados dos funcionários
     $stmt = $pdo->query("SELECT * FROM funcionario");
@@ -25,8 +25,10 @@ try {
                 <td><?= $funcionario['email']; ?></td>
                 <td><?= $funcionario['data_nascimento']; ?></td>
                 <td><?= $funcionario['morada']; ?></td>
-                <td><?= $departamentos_map[$funcionario['id_departamento']] ?? 'Departamento desconhecido'; ?>
-                </td>
+
+                <?php if ($AdmOuGestor) { ?>
+                    <td><?= $departamentos_map[$funcionario['id_departamento']] ?? 'Departamento desconhecido'; ?></td>
+                <?php } ?>
                 <td>
                     <button type="button" value="<?= $funcionario['id']; ?>"
                         class="viewFuncionarioBtn btn btn-secondary btn-sm">Visualizar</button>

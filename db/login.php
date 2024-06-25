@@ -19,6 +19,9 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
         if ($stmt->rowCount() == 1) {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             $_SESSION['user'] = $row;
+            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['user_name'] = $row['nome'];
+            $_SESSION['user_tipo'] = $row['tipo'];
         } else {
             $_SESSION['erro_login'] = "Utilizador/Password inválidos!";
         }

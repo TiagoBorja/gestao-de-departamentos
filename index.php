@@ -9,9 +9,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 
-$pagina = 0;
-if (isset($_GET["pagina"]))
-    $pagina = $_GET["pagina"];
+$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 0;
 
 $page_file = "";
 
@@ -70,18 +68,26 @@ $page_file = "";
                     <li class="nav-item">
                         <a class="nav-link <?php echo ($pagina == 0) ? "active" : ""; ?>" href="./?pagina=0">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo ($pagina == 1) ? "active" : ""; ?>"
-                            href="./?pagina=01">Departamentos</a>
-                    </li>
+
+                    <?php if (isset($_SESSION['user_tipo']) && ($_SESSION['user_tipo'] == 'A' || $_SESSION['user_tipo'] == 'G')) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo ($pagina == 1) ? "active" : ""; ?>"
+                                href="./?pagina=01">Departamentos</a>
+
+                        </li>
+                    <?php } ?>
+
                     <li class="nav-item">
                         <a class="nav-link <?php echo ($pagina == 2) ? "active" : ""; ?>"
                             href="./?pagina=02">Funcionários</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php echo ($pagina == 3) ? "active" : ""; ?>"
-                            href="./?pagina=03">Utilizadores</a>
-                    </li>
+                    
+                    <?php if (isset($_SESSION['user_tipo']) && ($_SESSION['user_tipo'] == 'A')) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo ($pagina == 3) ? "active" : ""; ?>"
+                                href="./?pagina=03">Utilizadores</a>
+                        </li>
+                    <?php } ?>
                 </ul>
 
                 <div class="d-flex">
